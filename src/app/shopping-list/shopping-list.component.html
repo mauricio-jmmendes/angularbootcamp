@@ -5,6 +5,6 @@
   </div>
 </form>
 <ul class="list-group">
-  <app-shopping-list-item *ngFor="let item of listItems" [shoppingItem]="item">
+  <app-shopping-list-item *ngFor="let item of listItems | async" [shoppingItem]="item">
   </app-shopping-list-item>
 </ul>

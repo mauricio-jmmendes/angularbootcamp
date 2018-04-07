@@ -22,13 +22,7 @@ export class ShoppingListItemComponent implements OnInit {
   }
 
   public removeItem() {
-    this.myShoppingListService.remove(this.listItem).subscribe(
-      response => {
-        console.log('Item excluído com sucesso!');
-        this.deleted = true;
-      },
-      error => console.error(error)
-    );
+    this.myShoppingListService.remove(this.listItem);
   }
 
   public editItem() {
@@ -36,15 +30,9 @@ export class ShoppingListItemComponent implements OnInit {
       key: this.listItem.key,
       name: this.listItem.name,
       disabled: true
-    }
+    };
 
-    this.myShoppingListService.edit(itemEdited).subscribe(
-      res => {
-        console.log("Item editado com sucesso!");
-        this.listItem.disabled = true;
-      },
-      error => console.error(error)
-    )
+    this.myShoppingListService.edit(itemEdited);
   }
 
 }
