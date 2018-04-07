@@ -32,17 +32,22 @@ export class ShoppingListService {
     return this.httpClient.get(`${environment.firebase.databaseURL}/items.json`);
   }
 
-  public add(item): Observable<Object>{
+  public add(item): Observable<Object> {
     return this.httpClient.post(`${environment.firebase.databaseURL}/items.json`, item);
   }
 
-  public remove(item) {
-    let index = this.listItems.indexOf(item);
-    this.listItems.splice(index, 1);
+  public remove(item): Observable<Object> {
+    return this.httpClient.delete(`${environment.firebase.databaseURL}/items/${item.key}.json`);
   }
 
-  public cross(item) {
-    let index = this.listItems.indexOf(item);
-    this.listItems[index].disabled = true;
+  public edit(item): Observable<Object> {
+    return this.httpClient.put(`${environment.firebase.databaseURL}/items/${item.key}.json`, item)
+  }
+
+  public patch(item): Observable<Object> {
+    let key =  item.key;
+    delete item.key;
+
+    return this.httpClient.patch(`${environment.firebase.databaseURL}/items/${key}.json`, item)
   }
 }
