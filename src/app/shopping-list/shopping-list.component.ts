@@ -14,7 +14,18 @@ export class ShoppingListComponent implements OnInit {
   constructor(
     private myShoppingListService: ShoppingListService
   ) {
-    this.listItems = this.myShoppingListService.findAll();
+    this.myShoppingListService.findAll().subscribe(
+      response => {
+        if (response) {
+          this.listItems = Object.keys(response).map(id => {
+            let item: any = response[id];
+            item.key = id;
+            return item;
+          });
+        }
+      },
+      error => console.error(error)
+    )
   }
 
   ngOnInit() {
@@ -27,7 +38,16 @@ export class ShoppingListComponent implements OnInit {
       disabled: false
     };
 
-    this.myShoppingListService.add(newItem);
+    // add
+    this.myShoppingListService.add(newItem).subscribe(
+      response => {
+        newItem['key'] = response
+        this.listItems.unshift(newItem);
+        error => {
+          console.log("Deu erro!");
+        }
+      }
+    );;
     this.itemToAdd = "";
   }
 
