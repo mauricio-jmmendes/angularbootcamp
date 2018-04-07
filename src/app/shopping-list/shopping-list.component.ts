@@ -9,6 +9,7 @@ import { ShoppingListService } from '../shopping-list.service';
 export class ShoppingListComponent implements OnInit {
 
   private listItems: Array<any>;
+  private itemToAdd: string = "";
 
   constructor(
     private myShoppingListService: ShoppingListService
@@ -17,7 +18,17 @@ export class ShoppingListComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
 
+  private addObjectToList() {
+    // create
+    let newItem = {
+      name: this.itemToAdd,
+      disabled: false
+    };
+
+    this.myShoppingListService.add(newItem);
+    this.itemToAdd = "";
   }
 
 }

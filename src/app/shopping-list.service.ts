@@ -35,7 +35,7 @@ export class ShoppingListService {
 
   public remove(item) {
     let index = this.listItems.indexOf(item);
-    this.listItems = this.listItems.splice(index, 1);
+    this.listItems.splice(index, 1);
   }
 
   public cross(item) {
